@@ -1,0 +1,37 @@
+{
+  "name": "baofoo",
+  "version": "0.0.1",
+  "description": "宝付认证支付sdk",
+  "scripts": {
+    "test": "npm install && ./node_modules/mocha/bin/_mocha --recursive test/",
+    "cov": "npm install && ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+  },
+  "keywords": [
+    "宝付",
+    "支付",
+    "API",
+    "SDK"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/navyxie/baofoo.git"
+  },
+  "dependencies": {
+    "lodash": "^4.12.0",
+    "request": "2.57.0",
+    "moment": "2.13.0",
+    "ursa": "^0.9.4"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "should": "^7.0.2",
+    "istanbul": "^0.4.3",
+    "coveralls": "2.11.9"
+  },
+  "license": "ISC",
+  "homepage": "https://github.com/navyxie/baofoo",
+  "maintainers": [{
+    "name": "navyxie",
+    "email": "navyxie2010@gmail.com"
+  }]
+}
