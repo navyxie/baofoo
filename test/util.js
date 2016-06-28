@@ -12,4 +12,10 @@ describe('util', function() {
     it('#hex2bin()', function() {
         should.exists(util.hex2bin('9a24c406429fc5b74ce53fff2553deb7c765b49ac9654a53c04588770edc617f5cb19c3c1c4ca'));
     });
+    it('#generateSerialNo()', function(){
+        util.generateSerialNo().should.containEql('TSN');
+    });
+    it('#generateTransId()', function(){
+        util.generateTransId().should.containEql('TI');
+    });
 });

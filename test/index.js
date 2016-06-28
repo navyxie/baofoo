@@ -1,11 +1,13 @@
 var should = require('should');
 var BAOFOO = require('../lib/index');
-var pri_key_str = 'MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAPI7Hb+2X0/1r4+xJXBoFRgFSN9G4xSSvlfKFd6ynYpHklLLfNG6z21bw+DDWvrkNpcbAjAzfgMZAXmBJKQRTMQM9RBxu2978ot1KJJBfk1Njw1lWrYCZiQ1uaNhXykHrBHYiBxDE/uVSAEmQ9IJyxB++khsNe7WWT2re2JW+OzfAgMBAAECgYEAz5OLRbth6CKRJODYRYBb+y6kKPoVJI8v4AlEPofv6wy0PpE0UIH2uS83J0ghkfi5Mzoo4OdvZ/Yoxle9738HuRrDVYzDgsr2mGmr11ESVhe7jmdrPryURai0qedjpSVgfY9QrQsgOilPR+GYkkOh0szhwkm4KHIKx8bdxpHvHCECQQD+IGFGNHov+3/HQJmcuqLRUizEbsi4mkKhiqcInQ482o+7uoysVYjszIkAlpDXVlxMqPEeVn0p9rVChJxiBMlxAkEA9ARJECnNP+y6eePT6ueii10p1wajUjcxL30bqYLPVWuhSICmttCoNiApIj4HFQSQBxDZXoSODEuo9m3TWJFzTwJBAN7wXSYP55msk36jx59dhHUKGEgDwIdinU3Gq5682b69JxdUIxEUwNis3wvrCwo+sx51n4Iz8f4cdwvx9pdvB6ECQQDd9Lfwt9U2fEHydUVhumijk45nRGZydjmLFKWAvreQ32HI7Ry31XvsH7zKpNkUSR4pDy5pRvFeRcPew28mdMcJAkAPW9D4FCgJAfH1v1be8YkP44sJ4nRlcm03hOx8/Ebp/Xx+lqHNsf0RIg+vO9PuD7vEm3ZAz5UXe4TamX6HwMxH';
-var pub_key_str = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCpBL+SzNNpeJVAhP8XO91dPrQHf6w2k7aqwnWGjnYjRlmy7iaeUJT/wb3PoH+ioGNTJyPHvfYHalEmvi133K3N8NdHizaYTjm1hgNBhBIK8aPZCR76C3UtQPv4mqA5fTZEWnRbr8JrVJoFNEN2+4JQwCeDtaC3OzPPflETt6zdOQIDAQAB';
+var pri_key_str = 'MIICeQIBADANBgkqhkiG9w0BAQEFAASCAmMwggJfAgEAAoGBANtfPOlYw8MfOdSPPCJGaQOc2zjUniPxSWZfpxvdrkjbrQ4UsvItXxOkplaTVXebKeXOWgN2mWW18druPwP3+ADq43NVHkfM3IRoT8PagoXgeHTdw2cyjQY9zVygt+2lriTVePAvCAj7c6n3Ojj7k9YY8K2jFP904OG7BSYC9i5BAgMBAAECgYEAmoV8L1XiFsghAROfpPj5sZzEYkSJ3AFy1VSdLii5QgLS5C86WRISfZClxifjtOsr2P7AMt5QcO93G+JjqtT478apAbQvDFyyge3khXl+GApHdaLHmQK4hlQu8XkywX4LmIomZBVm2YBQ55pTHLfnR9y4z7ECTmQIPeGM8mgSSY0CQQDuJ8DMLrtr7Dc1UcLOSss+qs+58xbAx2G7zEgEvqUizMQn/vur3aG17ek8GiL5xk/9o7fI2oR4ZevBHt4EG4CnAkEA688wJBRzeZV6dE+ZeohR3mFbdc27LZ0y0d1Kk/QfPgPZ57dgZDSCCgLAGPU5Wrna4yMORrBLNCpXAhMcoQwO1wJBAJuV7ve1xA3CmWLFEm5xIIzFTMYfkIrK9weYcqhe4EV23uN+Sm7CcUYIsqnoLVdefp2mmoemcoqxky5sewDV8tsCQQDDdN7gaRs2IlJ36iq7SBckDuqygK6vpmcjURup+2WSD7skt/jr1iIbjiAQD+NUck0ejEYfDa2oNZgdHh5S1x3NAkEAp+AbdOrEyV09bgQ4AXOhNS0K9/ijSzvIt3L/40NfaB9w3/AOd1CqT6YkgJ2VGt2Rc7Ih2715vFtmEiuzWRIa2A==';
+var pub_key_str = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8fHXEhX3NTfUIDTjl+C5HsjrlLLIMI86DiJv66c8AeMGS9mljzxi7TvGyPGclYwEeHl65/dSGbzF6Az9oFrWFuxQgEnMIA63M97fbp3IW4ib7xnOBWHEGML9CGXHIYDs6JKIn8mHt5UpiMq59inb6uhumYcIe2Kiv6KSXuutGcwIDAQAB';
 var baofoo;
-var acc_no = '6227003320240000000';
-var bind_id = '201603261412121000009649074';
+var acc_no = '6222020111122220000';
+var bind_id = '201604271949318660';
 var mobile = '13800000000';
+var name = '张宝';
+var id_card = '320301198502169142';
 describe('BAOFOO', function() {
     this.timeout(50000);
     it('instance not ok', function() {
@@ -17,9 +19,9 @@ describe('BAOFOO', function() {
     });
     it('instance ok', function() {
         baofoo = new BAOFOO({
-            member_id: '100000178',
-            terminal_id: '100000859',
-            rquest_url: 'https://tgw.baofoo.com/cutpayment/api/backTransRequest',
+            member_id: '100000276',
+            terminal_id: '100000990',
+            rquest_url: 'http://vgw.baofoo.com/cutpayment/api/backTransRequest',
             pri_key_str: pri_key_str,
             pub_key_str: pub_key_str
         });
@@ -30,16 +32,18 @@ describe('BAOFOO', function() {
             trans_serial_no: 'koala-trans_serial_no' + Date.now(),
             trans_id: 'koala-trans_id' + Date.now(),
             acc_no: acc_no,
-            id_card: '440882198105421458',
-            id_holder: '李四',
+            id_card: id_card,
+            id_holder: name,
             mobile: mobile,
-            pay_code: 'CCB',
+            pay_code: 'ICBC',
             additional_info: '测试',
             req_reserved: '保留字段',
             sms_code: '123456'
         }, function(err, data) {
-            data.should.have.properties({'code': '0000'});
-            should.exists(data.data.bind_id);
+            data.should.have.properties({
+                'resp_code': '0000'
+            });
+            should.exists(data.bind_id);
             done(err);
         });
     });
@@ -55,7 +59,9 @@ describe('BAOFOO', function() {
             trans_id: 'koala-trans_id' + Date.now(),
             bind_id: 'test-bind_id'
         }, function(err, data) {
-            data.should.have.properties({'code': '0000'});
+            data.should.have.properties({
+                'resp_code': '0000'
+            });
             done(err);
         });
     });
@@ -71,8 +77,33 @@ describe('BAOFOO', function() {
             trans_id: 'koala-trans_id' + Date.now(),
             acc_no: acc_no
         }, function(err, data) {
-            data.should.have.properties({'code': '0000'});
-            data.data.bind_id.should.be.equal(bind_id);
+            data.should.have.properties({
+                'resp_code': '0000'
+            });
+            data.bind_id.should.be.equal('201603261412121000009649074');
+            done(err);
+        });
+    });
+    it('#queryBindCard() without trans_serial_no', function(done) {
+        baofoo.queryBindCard({
+            trans_id: 'koala-trans_id' + Date.now(),
+            acc_no: acc_no
+        }, function(err, data) {
+            data.should.have.properties({
+                'resp_code': '0000'
+            });
+            data.bind_id.should.be.equal('201603261412121000009649074');
+            done(err);
+        });
+    });
+    it('#queryBindCard() without trans_serial_no and trans_id', function(done) {
+        baofoo.queryBindCard({
+            acc_no: acc_no
+        }, function(err, data) {
+            data.should.have.properties({
+                'resp_code': '0000'
+            });
+            data.bind_id.should.be.equal('201603261412121000009649074');
             done(err);
         });
     });
@@ -90,7 +121,9 @@ describe('BAOFOO', function() {
             txn_amt: 1,
             sms_code: '1234'
         }, function(err, data) {
-            data.should.have.properties(['code'])
+            data.should.have.properties({
+                'resp_code': '0000'
+            });
             done(err);
         });
     });
@@ -110,7 +143,9 @@ describe('BAOFOO', function() {
             acc_no: acc_no,
             next_txn_sub_type: '04'
         }, function(err, data) {
-            data.should.have.properties(['code'])
+            data.should.have.properties({
+                'resp_code': '0000'
+            });
             done(err);
         });
     });
@@ -124,9 +159,11 @@ describe('BAOFOO', function() {
         baofoo.queryOrder({
             trans_serial_no: 'koala-trans_serial_no' + Date.now(),
             trans_id: 'koala-trans_id' + Date.now(),
-            orig_trans_id: 'asdsatrwtg4fdg43'
+            orig_trans_id: 'koala-trans_id1467101538747'
         }, function(err, data) {
-            data.should.have.properties(['code'])
+            data.should.have.properties({
+                'resp_code': '0000'
+            });
             done(err);
         });
     });
@@ -136,4 +173,28 @@ describe('BAOFOO', function() {
             done(null);
         });
     });
-})
+    it('paySuccess()', function(done) {
+        var mockSuccessPayData = {
+            additional_info: '',
+            biz_type: '0000',
+            data_type: 'json',
+            member_id: '100000276',
+            req_reserved: '',
+            resp_code: '0000',
+            resp_msg: '交易成功',
+            succ_amt: '1',
+            terminal_id: '100000990',
+            trade_date: '20160628200626',
+            trans_id: 'koala-trans_id1467118334261',
+            trans_no: '201606280110000400749871',
+            trans_serial_no: 'koala-trans_serial_no1467118334261',
+            txn_sub_type: '04',
+            txn_type: '0431',
+            version: '4.0.0.0'
+        };
+        baofoo.paySuccess(mockSuccessPayData, function(err, data) {
+            data.code.should.be.equal(0);
+            done(err);
+        })
+    })
+});
