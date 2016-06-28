@@ -29,6 +29,7 @@ var baofoo = new BAOFOO({
 - [`doPay`](#doPay) 支付
 - [`sendMessage`](#sendMessage) 发送短信
 - [`queryOrder`](#queryOrder) 交易状态查询
+- [`success`](#success) 检查处理结果是否成功
 
 <a name="bindCard" />
 
@@ -136,6 +137,21 @@ baofoo.queryOrder({
 }, function(err, data) {
     if(!err){
         //todo data.code === '0000' is success
+    }
+}
+});
+```
+
+<a name="success" />
+
+`success` 检查处理结果是否成功
+
+```js
+baofoo.success({
+    resp_code: '0000'
+}, function(err, data) {
+    if(!err){
+        //todo data.code === 0 is success
     }
 }
 });

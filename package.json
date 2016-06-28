@@ -1,6 +1,6 @@
 {
   "name": "baofoo",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "宝付认证支付sdk",
   "scripts": {
     "test": "npm install && ./node_modules/mocha/bin/_mocha --recursive test/",
@@ -20,9 +20,7 @@
     "lodash": "^4.12.0",
     "request": "2.57.0",
     "moment": "2.13.0",
-    "ursa": "^0.9.4",
-    "async": "^1.4.2",
-    "bankcardinfo": "^1.0.0"
+    "ursa": "^0.9.4"
   },
   "devDependencies": {
     "mocha": "^2.2.5",

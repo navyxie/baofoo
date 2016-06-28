@@ -185,7 +185,7 @@ describe('BAOFOO', function() {
             done(null);
         });
     });
-    it('paySuccess()', function(done) {
+    it('success()', function(done) {
         var mockSuccessPayData = {
             additional_info: '',
             biz_type: '0000',
@@ -204,7 +204,7 @@ describe('BAOFOO', function() {
             txn_type: '0431',
             version: '4.0.0.0'
         };
-        baofoo.paySuccess(mockSuccessPayData, function(err, data) {
+        baofoo.success(mockSuccessPayData, function(err, data) {
             data.code.should.be.equal(0);
             done(err);
         })
