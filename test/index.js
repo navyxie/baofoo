@@ -4,7 +4,7 @@ var pri_key_str = 'MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAPI7Hb+2X0/1r
 var pub_key_str = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCpBL+SzNNpeJVAhP8XO91dPrQHf6w2k7aqwnWGjnYjRlmy7iaeUJT/wb3PoH+ioGNTJyPHvfYHalEmvi133K3N8NdHizaYTjm1hgNBhBIK8aPZCR76C3UtQPv4mqA5fTZEWnRbr8JrVJoFNEN2+4JQwCeDtaC3OzPPflETt6zdOQIDAQAB';
 var baofoo;
 describe('BAOFOO', function() {
-    this.timeout(10000);
+    this.timeout(50000);
     it('instance not ok', function() {
         try {
             new BAOFOO();
@@ -36,6 +36,98 @@ describe('BAOFOO', function() {
         }, function(err, data) {
             data.should.have.properties(['code'])
             done(err);
+        });
+    });
+    it('#bindCard() not ok', function(done) {
+        baofoo.bindCard('not ok', function(err, data) {
+            err.should.be.equal('first param is not a object or the second param is not a function');
+            done(null);
+        });
+    });
+    it('#unbindCard()', function(done) {
+        baofoo.unbindCard({
+            trans_serial_no: 'koala-trans_serial_no' + Date.now(),
+            trans_id: 'koala-trans_id' + Date.now(),
+            bind_id: 'test-bind_id'
+        }, function(err, data) {
+            data.should.have.properties(['code'])
+            done(err);
+        });
+    });
+    it('#unbindCard() not ok', function(done) {
+        baofoo.unbindCard('not ok', function(err, data) {
+            err.should.be.equal('first param is not a object or the second param is not a function');
+            done(null);
+        });
+    });
+    it('#queryBindCard()', function(done) {
+        baofoo.queryBindCard({
+            trans_serial_no: 'koala-trans_serial_no' + Date.now(),
+            trans_id: 'koala-trans_id' + Date.now(),
+            acc_no: '6227003320240000000'
+        }, function(err, data) {
+            data.should.have.properties(['code'])
+            done(err);
+        });
+    });
+    it('#queryBindCard() not ok', function(done) {
+        baofoo.queryBindCard('not ok', function(err, data) {
+            err.should.be.equal('first param is not a object or the second param is not a function');
+            done(null);
+        });
+    });
+    it('#doPay()', function(done) {
+        baofoo.doPay({
+            trans_serial_no: 'koala-trans_serial_no' + Date.now(),
+            trans_id: 'koala-trans_id' + Date.now(),
+            bind_id: 'test-bind_id',
+            txn_amt: 1,
+            sms_code: '1234'
+        }, function(err, data) {
+            data.should.have.properties(['code'])
+            done(err);
+        });
+    });
+    it('#doPay() not ok', function(done) {
+        baofoo.doPay('not ok', function(err, data) {
+            err.should.be.equal('first param is not a object or the second param is not a function');
+            done(null);
+        });
+    });
+    it('#sendMessage()', function(done) {
+        baofoo.sendMessage({
+            trans_serial_no: 'koala-trans_serial_no' + Date.now(),
+            trans_id: 'koala-trans_id' + Date.now(),
+            bind_id: 'test-bind_id',
+            txn_amt: 1,
+            mobile: '13800000000',
+            acc_no: '6227003320240000000',
+            next_txn_sub_type: '04'
+        }, function(err, data) {
+            data.should.have.properties(['code'])
+            done(err);
+        });
+    });
+    it('#sendMessage() not ok', function(done) {
+        baofoo.sendMessage('not ok', function(err, data) {
+            err.should.be.equal('first param is not a object or the second param is not a function');
+            done(null);
+        });
+    });
+    it('#queryOrder()', function(done) {
+        baofoo.queryOrder({
+            trans_serial_no: 'koala-trans_serial_no' + Date.now(),
+            trans_id: 'koala-trans_id' + Date.now(),
+            orig_trans_id: 'asdsatrwtg4fdg43'
+        }, function(err, data) {
+            data.should.have.properties(['code'])
+            done(err);
+        });
+    });
+    it('#queryOrder() not ok', function(done) {
+        baofoo.queryOrder('not ok', function(err, data) {
+            err.should.be.equal('first param is not a object or the second param is not a function');
+            done(null);
         });
     });
 })
