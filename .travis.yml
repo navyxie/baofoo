@@ -1,0 +1,18 @@
+language: node_js
+
+repo_token: ZgVlKWTJLtJj2UxexwNSGnE9l1FM7fAtw
+
+node_js:  
+
+  - 0.10.35
+
+services: 
+  - redis
+
+script: npm test
+
+
+after_script: npm run cov
+
+after_success: 
+  "curl -L -l https://coveralls.io/repos/github/navyxie/baofoo/badge.svg?branch=master"
