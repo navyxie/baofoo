@@ -149,6 +149,18 @@ describe('BAOFOO', function() {
             done(err);
         });
     });
+    it('#sendMessage()', function(done) {
+        baofoo.sendMessage({
+            bind_id: bind_id,
+            txn_amt: 1,
+            next_txn_sub_type: '04'
+        }, function(err, data) {
+            data.should.have.properties({
+                'resp_code': '0000'
+            });
+            done(err);
+        });
+    });
     it('#sendMessage() not ok', function(done) {
         baofoo.sendMessage('not ok', function(err, data) {
             err.should.be.equal('first param is not a object or the second param is not a function');
