@@ -114,8 +114,8 @@ baofoo.doPay({
 ```js
 //以发送支付短信认证码为例
 baofoo.sendMessage({
-    trans_serial_no: '商户流水号',
-    trans_id: '商户订单号',
+    bind_id: bind_id,
+    txn_amt: 1,
     next_txn_sub_type: '04' //交易子类
 }, function(err, data) {
     if(!err){
