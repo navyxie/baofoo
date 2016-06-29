@@ -205,8 +205,8 @@ describe('BAOFOO', function() {
             done(null);
         });
     });
-    it('#success()',function(done){
-        baofoo.success('',function(err){
+    it('#success()', function(done) {
+        baofoo.success('', function(err) {
             should.exists(err);
             done();
         })
@@ -235,80 +235,88 @@ describe('BAOFOO', function() {
             done(err);
         })
     });
-    it('#getBind_Id()',function(done){
-        baofoo.getBind_Id('1223',function(err){
+    it('#getBind_Id()', function(done) {
+        baofoo.getBind_Id('1223', function(err) {
             should.exists(err);
             done();
         })
     });
-    it('#getBind_Id()',function(done){
+    it('#getBind_Id()', function(done) {
         baofoo.getBind_Id({
-            acc_no:'6227003320240037533',
+            acc_no: '6227003320240037533',
             id_card: id_card,
             id_holder: name,
             mobile: mobile,
             sms_code: '123456'
-        },function(err,bind_id){
+        }, function(err, bind_id) {
             should.exists(bind_id);
             done();
         })
     });
-    it('#sendPayMessage() not ok',function(done){
-        baofoo.sendPayMessage('1223',function(err){
+    it('#getBind_Id() with bind_id', function(done) {
+        baofoo.getBind_Id({
+            bind_id: 'abc123456'
+        }, function(err, bind_id) {
+            bind_id.should.be.equal('abc123456');
+            done(err);
+        })
+    });
+    it('#sendPayMessage() not ok', function(done) {
+        baofoo.sendPayMessage('1223', function(err) {
             should.exists(err);
             done();
         })
     });
-    describe('sendPayMessage muk getBind_Id()',function(){
-        before(function(){
-            muk(baofoo,'getBind_Id',function(data,cb){
-                process.nextTick(function(){
-                    cb(null,bind_id);
+    describe('sendPayMessage muk getBind_Id()', function() {
+        before(function() {
+            muk(baofoo, 'getBind_Id', function(data, cb) {
+                process.nextTick(function() {
+                    cb(null, bind_id);
                 });
             });
         });
-        it('#sendPayMessage()',function(done){         
+        it('#sendPayMessage()', function(done) {
             baofoo.sendPayMessage({
-                acc_no:'6227003320240037533',
+                acc_no: '6227003320240037533',
                 id_card: id_card,
                 id_holder: name,
                 mobile: mobile,
                 txn_amt: 100
-            },function(err,data){
+            }, function(err, data) {
                 data.should.have.properties({
                     'resp_code': '0000'
                 });
                 done(err);
             })
         });
-        after(function(){
+        after(function() {
             muk.restore();
         });
     });
-    it('#bindCardAndPay() not ok',function(done){
-        baofoo.bindCardAndPay('1223',function(err){
+    it('#bindCardAndPay() not ok', function(done) {
+        baofoo.bindCardAndPay('1223', function(err) {
             should.exists(err);
             done();
         })
     });
-    describe('bindCardAndPay muk getBind_Id()',function(){
-        before(function(){
-            muk(baofoo,'getBind_Id',function(data,cb){
-                process.nextTick(function(){
-                    cb(null,bind_id);
+    describe('bindCardAndPay muk getBind_Id()', function() {
+        before(function() {
+            muk(baofoo, 'getBind_Id', function(data, cb) {
+                process.nextTick(function() {
+                    cb(null, bind_id);
                 });
             });
         });
-        it('#bindCardAndPay()',function(done){         
+        it('#bindCardAndPay()', function(done) {
             baofoo.bindCardAndPay({
-                acc_no:'6227003320240037533',
+                acc_no: '6227003320240037533',
                 id_card: id_card,
                 id_holder: name,
                 mobile: mobile,
                 sms_code: '123456',
                 txn_amt: 100,
                 trans_id: 'pay-trans_id-' + Date.now()
-            },function(err,data){
+            }, function(err, data) {
                 data.should.have.properties({
                     'resp_code': '0000'
                 });
@@ -316,7 +324,7 @@ describe('BAOFOO', function() {
                 done(err);
             })
         });
-        after(function(){
+        after(function() {
             muk.restore();
         });
     });
