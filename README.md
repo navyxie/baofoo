@@ -206,7 +206,7 @@ baofoo.sendPayMessage({
 ```js
 baofoo.bindCardAndPay({
     acc_no:'银行卡',
-    id_card: 身份证,
+    id_card: '身份证',
     id_holder: '姓名',
     mobile: '银行卡预留手机号',
     sms_code: '支付验证码',
