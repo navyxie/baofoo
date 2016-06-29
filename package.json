@@ -22,7 +22,7 @@
     "moment": "2.13.0",
     "ursa": "^0.9.4",
     "bankcardinfo": "^1.0.0",
-    "async": "2.57.0"
+    "async": "1.5.2"
   },
   "devDependencies": {
     "mocha": "^2.2.5",
