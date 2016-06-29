@@ -30,6 +30,9 @@ var baofoo = new BAOFOO({
 - [`sendMessage`](#sendMessage) 发送短信
 - [`queryOrder`](#queryOrder) 交易状态查询
 - [`success`](#success) 检查处理结果是否成功
+- [`getBind_Id`](#getBind_Id) 获取绑卡id:bind_id
+- [`sendPayMessage`](#sendPayMessage) 获取支付验证码
+- [`bindCardAndPay`](#bindCardAndPay) 绑卡并支付
 
 <a name="bindCard" />
 
@@ -157,6 +160,65 @@ baofoo.success({
 });
 ```
 
+
+<a name="getBind_Id" />
+
+`getBind_Id` 获取绑卡id:bind_id
+
+```js
+baofoo.getBind_Id({
+    acc_no:'银行卡',
+    id_card: '身份证',
+    id_holder: '姓名',
+    mobile: '银行卡预留手机号',
+    sms_code: '绑卡短信(若开通绑卡不发短信业务，可以不填写)'
+}, function(err, bind_id) {
+    if(!err){
+        //todo bind_id
+    }
+}
+});
+```
+
+<a name="sendPayMessage" />
+
+`sendPayMessage` 获取支付验证码
+
+```js
+baofoo.sendPayMessage({
+    acc_no:'银行卡',
+    id_card: '身份证',
+    id_holder: '姓名',
+    mobile: '银行卡预留手机号',
+    txn_amt: '购买金额（分）'
+}, function(err, data) {
+    if(!err){
+        //todo data.code === 0 is success
+    }
+}
+});
+```
+
+<a name="bindCardAndPay" />
+
+`bindCardAndPay` 绑卡并支付
+
+```js
+baofoo.bindCardAndPay({
+    acc_no:'银行卡',
+    id_card: 身份证,
+    id_holder: '姓名',
+    mobile: '银行卡预留手机号',
+    sms_code: '支付验证码',
+    txn_amt: '购买金额（分）',
+    trans_id: '商户订单号'
+}, function(err, data) {
+    if(!err){
+        //todo data.code === 0 is success
+    }
+}
+});
+```
 ## test
 
 ```

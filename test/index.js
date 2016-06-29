@@ -1,4 +1,5 @@
 var should = require('should');
+var muk = require('muk');
 var BAOFOO = require('../lib/index');
 var pri_key_str = 'MIICeQIBADANBgkqhkiG9w0BAQEFAASCAmMwggJfAgEAAoGBANtfPOlYw8MfOdSPPCJGaQOc2zjUniPxSWZfpxvdrkjbrQ4UsvItXxOkplaTVXebKeXOWgN2mWW18druPwP3+ADq43NVHkfM3IRoT8PagoXgeHTdw2cyjQY9zVygt+2lriTVePAvCAj7c6n3Ojj7k9YY8K2jFP904OG7BSYC9i5BAgMBAAECgYEAmoV8L1XiFsghAROfpPj5sZzEYkSJ3AFy1VSdLii5QgLS5C86WRISfZClxifjtOsr2P7AMt5QcO93G+JjqtT478apAbQvDFyyge3khXl+GApHdaLHmQK4hlQu8XkywX4LmIomZBVm2YBQ55pTHLfnR9y4z7ECTmQIPeGM8mgSSY0CQQDuJ8DMLrtr7Dc1UcLOSss+qs+58xbAx2G7zEgEvqUizMQn/vur3aG17ek8GiL5xk/9o7fI2oR4ZevBHt4EG4CnAkEA688wJBRzeZV6dE+ZeohR3mFbdc27LZ0y0d1Kk/QfPgPZ57dgZDSCCgLAGPU5Wrna4yMORrBLNCpXAhMcoQwO1wJBAJuV7ve1xA3CmWLFEm5xIIzFTMYfkIrK9weYcqhe4EV23uN+Sm7CcUYIsqnoLVdefp2mmoemcoqxky5sewDV8tsCQQDDdN7gaRs2IlJ36iq7SBckDuqygK6vpmcjURup+2WSD7skt/jr1iIbjiAQD+NUck0ejEYfDa2oNZgdHh5S1x3NAkEAp+AbdOrEyV09bgQ4AXOhNS0K9/ijSzvIt3L/40NfaB9w3/AOd1CqT6YkgJ2VGt2Rc7Ih2715vFtmEiuzWRIa2A==';
 var pub_key_str = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8fHXEhX3NTfUIDTjl+C5HsjrlLLIMI86DiJv66c8AeMGS9mljzxi7TvGyPGclYwEeHl65/dSGbzF6Az9oFrWFuxQgEnMIA63M97fbp3IW4ib7xnOBWHEGML9CGXHIYDs6JKIn8mHt5UpiMq59inb6uhumYcIe2Kiv6KSXuutGcwIDAQAB';
@@ -36,6 +37,25 @@ describe('BAOFOO', function() {
             id_holder: name,
             mobile: mobile,
             pay_code: 'ICBC',
+            additional_info: '测试',
+            req_reserved: '保留字段',
+            sms_code: '123456'
+        }, function(err, data) {
+            data.should.have.properties({
+                'resp_code': '0000'
+            });
+            should.exists(data.bind_id);
+            done(err);
+        });
+    });
+    it('#bindCard() without pay_code', function(done) {
+        baofoo.bindCard({
+            trans_serial_no: 'koala-trans_serial_no' + Date.now(),
+            trans_id: 'koala-trans_id' + Date.now(),
+            acc_no: acc_no,
+            id_card: id_card,
+            id_holder: name,
+            mobile: mobile,
             additional_info: '测试',
             req_reserved: '保留字段',
             sms_code: '123456'
@@ -185,7 +205,13 @@ describe('BAOFOO', function() {
             done(null);
         });
     });
-    it('success()', function(done) {
+    it('#success()',function(done){
+        baofoo.success('',function(err){
+            should.exists(err);
+            done();
+        })
+    });
+    it('#success()', function(done) {
         var mockSuccessPayData = {
             additional_info: '',
             biz_type: '0000',
@@ -208,5 +234,90 @@ describe('BAOFOO', function() {
             data.code.should.be.equal(0);
             done(err);
         })
-    })
+    });
+    it('#getBind_Id()',function(done){
+        baofoo.getBind_Id('1223',function(err){
+            should.exists(err);
+            done();
+        })
+    });
+    it('#getBind_Id()',function(done){
+        baofoo.getBind_Id({
+            acc_no:'6227003320240037533',
+            id_card: id_card,
+            id_holder: name,
+            mobile: mobile,
+            sms_code: '123456'
+        },function(err,bind_id){
+            should.exists(bind_id);
+            done();
+        })
+    });
+    it('#sendPayMessage() not ok',function(done){
+        baofoo.sendPayMessage('1223',function(err){
+            should.exists(err);
+            done();
+        })
+    });
+    describe('sendPayMessage muk getBind_Id()',function(){
+        before(function(){
+            muk(baofoo,'getBind_Id',function(data,cb){
+                process.nextTick(function(){
+                    cb(null,bind_id);
+                });
+            });
+        });
+        it('#sendPayMessage()',function(done){         
+            baofoo.sendPayMessage({
+                acc_no:'6227003320240037533',
+                id_card: id_card,
+                id_holder: name,
+                mobile: mobile,
+                txn_amt: 100
+            },function(err,data){
+                data.should.have.properties({
+                    'resp_code': '0000'
+                });
+                done(err);
+            })
+        });
+        after(function(){
+            muk.restore();
+        });
+    });
+    it('#bindCardAndPay() not ok',function(done){
+        baofoo.bindCardAndPay('1223',function(err){
+            should.exists(err);
+            done();
+        })
+    });
+    describe('bindCardAndPay muk getBind_Id()',function(){
+        before(function(){
+            muk(baofoo,'getBind_Id',function(data,cb){
+                process.nextTick(function(){
+                    cb(null,bind_id);
+                });
+            });
+        });
+        it('#bindCardAndPay()',function(done){         
+            baofoo.bindCardAndPay({
+                acc_no:'6227003320240037533',
+                id_card: id_card,
+                id_holder: name,
+                mobile: mobile,
+                sms_code: '123456',
+                txn_amt: 100,
+                trans_id: 'pay-trans_id-' + Date.now()
+            },function(err,data){
+                data.should.have.properties({
+                    'resp_code': '0000'
+                });
+                data.trans_id.should.containEql('pay-trans_id-');
+                done(err);
+            })
+        });
+        after(function(){
+            muk.restore();
+        });
+    });
 });
