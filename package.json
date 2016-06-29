@@ -26,7 +26,8 @@
     "mocha": "^2.2.5",
     "should": "^7.0.2",
     "istanbul": "^0.4.3",
-    "coveralls": "2.11.9"
+    "coveralls": "2.11.9",
+    "muk": "^0.3.2"
   },
   "license": "ISC",
   "homepage": "https://github.com/navyxie/baofoo",

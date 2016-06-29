@@ -24,4 +24,16 @@ describe('util', function() {
     it('#isSuccess()', function() {
         util.isSuccess({resp_code:'0000'}).should.be.true;
     });
+    it('#getPayCode()', function() {
+        util.getPayCode('COMM').should.be.equal('BCOM');
+    });
+    it('#getPayCode()', function() {
+        util.getPayCode('SPABANK').should.be.equal('PAB');
+    });
+    it('#getPayCode()', function() {
+        util.getPayCode('SHBANK').should.be.equal('SHB');
+    });
+    it('#getPayCode()', function() {
+        util.getPayCode('CCB').should.be.equal('CCB');
+    });
 });
