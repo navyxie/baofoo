@@ -273,7 +273,6 @@ describe('BAOFOO', function() {
                 id_card: id_card,
                 id_holder: name,
                 mobile: mobile,
-                sms_code: '123456',
                 txn_amt: 100
             },function(err,data){
                 data.should.have.properties({
