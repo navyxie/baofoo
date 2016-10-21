@@ -24,10 +24,14 @@ describe('BAOFOO', function() {
             terminal_id: '100000990',
             rquest_url: 'http://vgw.baofoo.com/cutpayment/api/backTransRequest',
             pri_key_str: pri_key_str,
-            pub_key_str: pub_key_str
+            pub_key_str: pub_key_str,
+            debug: true
         });
         baofoo.should.have.properties(['bindCard', 'unbindCard', 'queryBindCard', 'doPay', 'sendMessage', 'queryOrder']);
     });
+    it('#log()', function() {
+        baofoo.log('test baofoo log');
+    })
     it('#bindCard()', function(done) {
         baofoo.bindCard({
             trans_serial_no: 'koala-trans_serial_no' + Date.now(),
